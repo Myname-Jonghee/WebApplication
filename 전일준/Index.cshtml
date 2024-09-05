@@ -1,0 +1,148 @@
+@model IEnumerable<Project_battery02.Models.BatteryModel>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Long Duration & Energy</title>
+    <style>
+        .battery-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: flex-start; /* 왼쪽 정렬 */
+            gap: 20px;
+        }
+
+        .battery-item {
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            padding: 20px;
+            width: calc(33.33% - 20px); /* 모든 카드 크기 동일하게 */
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s;
+            min-height: 450px; /* 모든 카드의 높이를 동일하게 설정 */
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+            .battery-item:hover {
+                transform: scale(1.05);
+            }
+
+            .battery-item img {
+                max-width: 100%;
+                height: 200px;
+                object-fit: cover;
+                margin-bottom: 15px;
+                border-radius: 5px;
+            }
+
+            .battery-item h3 {
+                margin: 0;
+                font-size: 1.2em;
+                color: #333;
+            }
+
+            .battery-item p {
+                font-size: 1em;
+                color: #666;
+            }
+
+        .buy-button {
+            margin-top: 15px;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            align-self: center;
+        }
+
+            .buy-button:hover {
+                background-color: #0056b3;
+            }
+
+        /* 구분선 스타일 */
+        hr {
+            border: 0;
+            height: 1px;
+            background-color: #ddd;
+            margin: 40px 0;
+        }
+
+        /* Total 텍스트 스타일 */
+        .total-text {
+            font-size: 1em; /* 크기 살짝 키움 */
+            color: #666; /* 연한 색상 */
+            text-align: left; /* 왼쪽 정렬 */
+            margin-bottom: 10px; /* 아래 간격 */
+        }
+
+        /* 섹션을 박스 안에 넣는 스타일 */
+        .section-box {
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 40px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            background-color: #f9f9f9; /* 박스 배경색 */
+        }
+
+            .section-box h1 {
+                margin-top: 0;
+            }
+
+    </style>
+</head>
+<body>
+    <!-- Long Duration & Energy 섹션 박스 -->
+    <div class="section-box">
+        <h1>Long Duration & Energy</h1>
+        <div class="total-text">Total: @Model.Count(b => b.Category == "LongDuration")</div> <!-- 총 개수 -->
+
+        <div class="battery-grid">
+            @foreach (var battery in Model.Where(b => b.Category == "LongDuration"))
+            {
+                <div class="battery-item">
+                    <a href="@Url.Action("Detail", "Home", new { id = battery.Id })" class="details-link">
+                        <img src="@battery.ImagePath" alt="Battery Image" />
+                        <h3>@battery.Name / @battery.Model</h3>
+                        <p><strong>Energy (kWh):</strong> @battery.Energy</p>
+                        <p><strong>Voltage Range (V):</strong> @battery.VoltageRange</p>
+                        <p><strong>Dimension (mm):</strong> @battery.Dimension</p>
+                    </a>
+                    <button class="buy-button">구매</button> <!-- 구매 버튼 추가 -->
+                </div>
+            }
+        </div>
+    </div>
+
+    <!-- Short Duration & Power 섹션 박스 -->
+    <div class="section-box">
+        <h1>Short Duration & Power</h1>
+        <div class="total-text">Total: @Model.Count(b => b.Category == "ShortDuration")</div> <!-- 총 개수 -->
+
+        <div class="battery-grid">
+            @foreach (var battery in Model.Where(b => b.Category == "ShortDuration"))
+            {
+                <div class="battery-item">
+                    <a href="@Url.Action("Detail", "Home", new { id = battery.Id })" class="details-link">
+                        <img src="@battery.ImagePath" alt="Battery Image" />
+                        <h3>@battery.Name / @battery.Model</h3>
+                        <p><strong>Energy (kWh):</strong> @battery.Energy</p>
+                        <p><strong>Voltage Range (V):</strong> @battery.VoltageRange</p>
+                        <p><strong>Dimension (mm):</strong> @battery.Dimension</p>
+                    </a>
+                    <button class="buy-button">구매</button> <!-- 구매 버튼 추가 -->
+                </div>
+            }
+        </div>
+    </div>
+
+</body>
+</html>
