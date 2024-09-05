@@ -1,0 +1,132 @@
+@model Project_battery02.Models.BatteryModel
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@Model.Name / @Model.Model</title>
+    <style>
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: flex-start; /* 이미지가 상단에 정렬되도록 */
+        }
+
+        .image-section {
+            width: 30%; /* 이미지가 차지할 공간 */
+            margin-right: 20px; /* 오른쪽 정보와 간격 */
+        }
+
+        .details-section {
+            width: 65%; /* 정보가 차지할 공간 */
+        }
+
+            .details-section h2 {
+                margin-top: 0;
+            }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 8px 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            border: 1px solid #ddd;
+            padding: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        /* 기본적인 스타일 설정 */
+        body {
+            font-family: Arial, sans-serif;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>@Model.Name / @Model.Model</h1>
+
+    <div class="container">
+        <!-- 이미지 섹션 -->
+        <div class="image-section">
+            <img src="@Model.ImagePath" alt="Battery Image" />
+        </div>
+
+        <!-- 상세 정보 섹션 -->
+        <div class="details-section">
+            <h2>Specification</h2>
+            <table>
+                <tr>
+                    <th>Energy (kWh)</th>
+                    <td>@Model.Energy</td>
+                </tr>
+                <tr>
+                    <th>Capacity (Ah)</th>
+                    <td>145</td>
+                </tr>
+                <tr>
+                    <th>Nominal Voltage (V)</th>
+                    <td>873</td>
+                </tr>
+                <tr>
+                    <th>Voltage Range (V)</th>
+                    <td>@Model.VoltageRange</td>
+                </tr>
+                <tr>
+                    <th>Dimension (W x H x D, mm)</th>
+                    <td>@Model.Dimension</td>
+                </tr>
+                <tr>
+                    <th>Weight (kg)</th>
+                    <td>905</td>
+                </tr>
+            </table>
+
+            <h2>Pack</h2>
+            <table>
+                <tr>
+                    <th>Model</th>
+                    <td>@Model.Model</td>
+                </tr>
+                <tr>
+                    <th>Energy (kWh)</th>
+                    <td>7.4</td>
+                </tr>
+                <tr>
+                    <th>Capacity (Ah)</th>
+                    <td>145</td>
+                </tr>
+                <tr>
+                    <th>Nominal Voltage (V)</th>
+                    <td>51.4</td>
+                </tr>
+                <tr>
+                    <th>Voltage Range (V)</th>
+                    <td>42.0 ~ 58.8</td>
+                </tr>
+                <tr>
+                    <th>Dimension (W x H x D, mm)</th>
+                    <td>445 x 110 x 620</td>
+                </tr>
+                <tr>
+                    <th>Weight (kg)</th>
+                    <td>46</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <a href="@Url.Action("Index", "Home")">Back to list</a>
+
+</body>
+</html>
