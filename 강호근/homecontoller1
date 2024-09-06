@@ -1,0 +1,19 @@
+public IActionResult Login()
+{
+    return View();
+}
+
+[HttpPost]
+public IActionResult Login(string Username, string Password)
+{
+    // Logins 테이블에서 사용자 정보 검색
+    var user = _loginContext.Logins.FirstOrDefault(u => u.Username == Username && u.Password == Password);
+
+    if (user != null)
+    {
+        return RedirectToAction("Index"); // 로그인 성공 시 홈 페이지로 이동
+    }
+
+    ViewBag.Message = "Invalid login attempt. Please check your username and password."; // 실패 메시지 출력
+    return View();
+}
